@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Video Downloader</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>Video Downloader</h1>
+
+        <p>Download your authorized media</p>
+
+        <!-- URL INPUT -->
+
+        <input
+            type="text"
+            id="videoUrl"
+            placeholder="Paste video URL here"
+        >
+
+        <button class="check-btn" onclick="checkVideo()">
+            Check Video
+        </button>
+
+
+        <!-- OPTIONS -->
+
+        <div class="options">
+
+            <!-- QUALITY -->
+
+            <div class="option-box">
+
+                <label for="quality">
+                    Quality
+                </label>
+
+                <select id="quality">
+
+                    <option value="360">
+                        360p
+                    </option>
+
+                    <option value="480">
+                        480p
+                    </option>
+
+                    <option value="720" selected>
+                        720p
+                    </option>
+
+                    <option value="1080">
+                        1080p
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- TYPE -->
+
+            <div class="option-box">
+
+                <label for="type">
+                    Type
+                </label>
+
+                <select
+                    id="type"
+                    onchange="changeQuality()"
+                >
+
+                    <option value="video">
+                        Video
+                    </option>
+
+                    <option value="audio">
+                        Audio
+                    </option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+
+        <!-- RESULT -->
+
+        <div
+            id="result"
+            class="result"
+        ></div>
+
+
+        <!-- DOWNLOAD -->
+
+        <button
+            class="download-btn"
+            onclick="startDownload()"
+        >
+            ⬇ Download
+        </button>
+
+    </div>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
