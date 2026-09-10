@@ -1,121 +1,1052 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Video Downloader</title>
-
+    <title>AgriShield</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <div class="container">
+<!-- ================= AUTH PAGE ================= -->
 
-        <h1>Video Downloader</h1>
+<div id="authPage" class="page">
 
-        <p>Download your authorized media</p>
-
-        <!-- URL INPUT -->
-
-        <input
-            type="text"
-            id="videoUrl"
-            placeholder="Paste video URL here"
-        >
-
-        <button class="check-btn" onclick="checkVideo()">
-            Check Video
-        </button>
-
-
-        <!-- OPTIONS -->
-
-        <div class="options">
-
-            <!-- QUALITY -->
-
-            <div class="option-box">
-
-                <label for="quality">
-                    Quality
-                </label>
-
-                <select id="quality">
-
-                    <option value="360">
-                        360p
-                    </option>
-
-                    <option value="480">
-                        480p
-                    </option>
-
-                    <option value="720" selected>
-                        720p
-                    </option>
-
-                    <option value="1080">
-                        1080p
-                    </option>
-
-                </select>
-
-            </div>
-
-
-            <!-- TYPE -->
-
-            <div class="option-box">
-
-                <label for="type">
-                    Type
-                </label>
-
-                <select
-                    id="type"
-                    onchange="changeQuality()"
-                >
-
-                    <option value="video">
-                        Video
-                    </option>
-
-                    <option value="audio">
-                        Audio
-                    </option>
-
-                </select>
-
-            </div>
-
+    <!-- FULL SCREEN BACKGROUND SLIDER -->
+    <div class="bg-slider">
+        <div class="bg-slide active">
+            <img src="images/slide1.jpg" alt="Farming 1">
+        </div>
+        <div class="bg-slide">
+            <img src="images/slide2.jpg" alt="Farming 2">
+        </div>
+        <div class="bg-slide">
+            <img src="images/slide3.jpg" alt="Farming 3">
+        </div>
+        <div class="bg-slide">
+            <img src="images/slide4.jpg" alt="Farming 4">
         </div>
 
+        <div class="bg-overlay"></div>
 
-        <!-- RESULT -->
+        <div class="slider-dots">
+            <span class="dot active" onclick="goToSlide(0)"></span>
+            <span class="dot" onclick="goToSlide(1)"></span>
+            <span class="dot" onclick="goToSlide(2)"></span>
+            <span class="dot" onclick="goToSlide(3)"></span>
+        </div>
+    </div>
 
-        <div
-            id="result"
-            class="result"
-        ></div>
+    <!-- LOGIN / REGISTER CARD -->
+    <main class="auth-wrapper">
+
+        <section class="auth-card">
+
+            <div class="form-header">
+                <div class="mini-logo">🌱</div>
+                <h2 id="formTitle">Welcome Back</h2>
+                <p id="formSubtitle">Login to continue to AgriShield</p>
+            </div>
 
 
-        <!-- DOWNLOAD -->
+            <!-- LOGIN -->
 
-        <button
-            class="download-btn"
-            onclick="startDownload()"
-        >
-            ⬇ Download
-        </button>
+            <form id="loginForm">
 
+                <div class="input-group">
+                    <label>Email Address</label>
+                    <div class="input-box">
+                        <span>✉</span>
+                        <input type="email" id="loginEmail" placeholder="Enter your email" required>
+                    </div>
+                </div>
+
+
+                <div class="input-group">
+                    <label>Password</label>
+                    <div class="input-box">
+                        <span>🔒</span>
+                        <input type="password" id="loginPassword" placeholder="Enter your password" required>
+                        <button type="button" class="show-password" onclick="togglePassword('loginPassword', this)">👁</button>
+                    </div>
+                </div>
+
+
+                <div class="form-options">
+                    <label class="remember">
+                        <input type="checkbox">
+                        <span>Remember me</span>
+                    </label>
+                    <a href="#" onclick="forgotPassword()">Forgot Password?</a>
+                </div>
+
+
+                <button type="submit" class="main-btn">Login <span>→</span></button>
+
+            </form>
+
+
+            <!-- REGISTER -->
+
+            <form id="registerForm" class="hidden">
+
+                <div class="input-group">
+                    <label>Full Name</label>
+                    <div class="input-box">
+                        <span>👤</span>
+                        <input type="text" id="registerName" placeholder="Enter your name" required>
+                    </div>
+                </div>
+
+
+                <div class="input-group">
+                    <label>Email Address</label>
+                    <div class="input-box">
+                        <span>✉</span>
+                        <input type="email" id="registerEmail" placeholder="Enter your email" required>
+                    </div>
+                </div>
+
+
+                <div class="input-group">
+                    <label>Password</label>
+                    <div class="input-box">
+                        <span>🔒</span>
+                        <input type="password" id="registerPassword" placeholder="Create a password" required>
+                        <button type="button" class="show-password" onclick="togglePassword('registerPassword', this)">👁</button>
+                    </div>
+                </div>
+
+
+                <div class="input-group">
+                    <label>Confirm Password</label>
+                    <div class="input-box">
+                        <span>🔐</span>
+                        <input type="password" id="confirmPassword" placeholder="Confirm your password" required>
+                    </div>
+                </div>
+
+
+                <button type="submit" class="main-btn">Create Account <span>→</span></button>
+
+            </form>
+
+
+            <div class="switch-form">
+
+                <p id="switchText">
+                    Don't have an account?
+                    <button onclick="showRegister()">Create Account</button>
+                </p>
+
+                <p id="loginSwitch" class="hidden">
+                    Already have an account?
+                    <button onclick="showLogin()">Login</button>
+                </p>
+
+            </div>
+
+
+            <div class="demo-note">
+                🌿 Agriculture Management Portal
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+
+<!-- ================= DASHBOARD ================= -->
+
+<div id="dashboardPage" class="dashboard-page hidden">
+
+    <!-- Dashboard Background Slider (blurred) -->
+    <div class="dashboard-bg-slider">
+        <div class="dashboard-bg-slide active">
+            <img src="images/slide1.jpg" alt="Farming 1">
+        </div>
+        <div class="dashboard-bg-slide">
+            <img src="images/slide2.jpg" alt="Farming 2">
+        </div>
+        <div class="dashboard-bg-slide">
+            <img src="images/slide3.jpg" alt="Farming 3">
+        </div>
+        <div class="dashboard-bg-slide">
+            <img src="images/slide4.jpg" alt="Farming 4">
+        </div>
+        <div class="dashboard-bg-overlay"></div>
     </div>
 
 
-    <script src="script.js"></script>
+    <header class="navbar">
+
+        <div class="nav-logo">
+            <div class="small-logo">🌱</div>
+            <div>
+                <h2>AgriShield</h2>
+                <span>Smart Agriculture</span>
+            </div>
+        </div>
+
+
+        <div class="nav-right">
+
+            <div class="language-switch">
+                <span>🌐</span>
+                <select id="languageSelect" onchange="changeLanguage()">
+                    <option value="en">English</option>
+                    <option value="hi">हिंदी</option>
+                    <option value="mr">मराठी</option>
+                </select>
+            </div>
+
+
+            <div class="user-box">
+                <div class="user-avatar">👤</div>
+                <div>
+                    <strong id="userName">Farmer</strong>
+                    <small id="userRole">Farmer</small>
+                </div>
+            </div>
+
+
+            <button class="logout-btn" onclick="logout()" id="logoutText">Logout</button>
+
+        </div>
+
+    </header>
+
+
+
+    <main class="dashboard-container">
+
+
+        <!-- WELCOME WITH FULL BACKGROUND SLIDER -->
+
+        <section class="welcome-section">
+
+            <div class="welcome-slider">
+                <div class="welcome-slide active">
+                    <img src="images/slide1.jpg" alt="Farming 1">
+                </div>
+                <div class="welcome-slide">
+                    <img src="images/slide2.jpg" alt="Farming 2">
+                </div>
+                <div class="welcome-slide">
+                    <img src="images/slide3.jpg" alt="Farming 3">
+                </div>
+                <div class="welcome-slide">
+                    <img src="images/slide4.jpg" alt="Farming 4">
+                </div>
+                <div class="welcome-overlay"></div>
+            </div>
+
+            <div class="welcome-text">
+                <p class="welcome-small" id="welcomeSmall">Welcome to AgriShield 🌱</p>
+                <h1 id="welcomeTitle">How can we help<br>your farm today?</h1>
+                <p class="welcome-description" id="welcomeDescription">Choose what you need help with and let's take care of your crops together.</p>
+            </div>
+
+        </section>
+
+
+
+        <!-- MAIN CHOICES -->
+
+        <section class="choice-section">
+
+            <div class="section-heading">
+                <span id="choiceTitle">What brings you here?</span>
+                <p id="choiceSubtitle">Select an option to get started</p>
+            </div>
+
+
+            <div class="choice-card problem-card" onclick="toggleProblemOptions()">
+                <div class="card-icon problem-icon">🔍</div>
+                <div class="card-content">
+                    <span class="card-label" id="problemLabel">NEED HELP?</span>
+                    <h2 id="problemTitle">My Crop / Plant Has a Problem</h2>
+                    <p id="problemDescription">Something is wrong with your wheat, plant or crop? Tell us what's happening and we'll help identify the problem.</p>
+                    <div class="card-tags">
+                        <span id="tagWheat">🌾 Wheat</span>
+                        <span id="tagPlant">🌱 Plant</span>
+                        <span id="tagPest">🐛 Pest</span>
+                        <span id="tagDisease">🦠 Disease</span>
+                    </div>
+                </div>
+                <div class="card-arrow">↓</div>
+            </div>
+
+            <div id="problemSubOptions" class="sub-options-wrapper hidden">
+                <div class="sub-choice-card" onclick="openPlantReport()">
+                    <span class="sub-icon">🌱</span>
+                    <div class="sub-content">
+                        <strong id="subPlantProblem">Plant Problem</strong>
+                        <p id="subPlantProblemDesc">Leaves, growth, or disease</p>
+                    </div>
+                    <span class="sub-arrow">→</span>
+                </div>
+
+                <div class="sub-choice-card" onclick="openFarmingReport()">
+                    <span class="sub-icon">🌾</span>
+                    <div class="sub-content">
+                        <strong id="subFarmingProblem">Farming Problem</strong>
+                        <p id="subFarmingProblemDesc">Soil, water, or crop issues</p>
+                    </div>
+                    <span class="sub-arrow">→</span>
+                </div>
+            </div>
+
+
+
+            <div class="choice-card monitor-card" onclick="toggleMonitorOptions()">
+                <div class="card-icon monitor-icon">📊</div>
+                <div class="card-content">
+                    <span class="card-label" id="monitorLabel">START FROM BEGINNING</span>
+                    <h2 id="monitorTitle">Start Farm Monitoring</h2>
+                    <p id="monitorDescription">Starting a new crop or farming on your land? We'll monitor your crop from the beginning and help you track its growth.</p>
+                    <div class="card-tags">
+                        <span id="tagNewCrop">🌱 New Crop</span>
+                        <span id="tagGrowth">📅 Growth</span>
+                        <span id="tagWeather">🌦 Weather</span>
+                        <span id="tagMonitoring">💧 Monitoring</span>
+                    </div>
+                </div>
+                <div class="card-arrow">↓</div>
+            </div>
+
+            <div id="monitorSubOptions" class="sub-options-wrapper hidden">
+                <div class="sub-choice-card" onclick="openPlantMonitoring()">
+                    <span class="sub-icon">🌱</span>
+                    <div class="sub-content">
+                        <strong id="subPlantMonitor">Plant Monitoring</strong>
+                        <p id="subPlantMonitorDesc">Track plant growth & health</p>
+                    </div>
+                    <span class="sub-arrow">→</span>
+                </div>
+
+                <div class="sub-choice-card" onclick="openFarmingMonitoring()">
+                    <span class="sub-icon">🌾</span>
+                    <div class="sub-content">
+                        <strong id="subFarmingMonitor">Farming Monitoring</strong>
+                        <p id="subFarmingMonitorDesc">Track farm & crop progress</p>
+                    </div>
+                    <span class="sub-arrow">→</span>
+                </div>
+            </div>
+
+        </section>
+
+
+
+        <!-- TRACK PROGRESS / HISTORY -->
+
+        <section class="history-section">
+
+            <div class="history-header">
+
+                <div>
+                    <span class="history-label">ACTIVITY</span>
+                    <h2 id="historyTitle">Track Progress</h2>
+                    <p id="historySubtitle">View your crop problems and farm monitoring history.</p>
+                </div>
+
+                <div class="history-icon">📈</div>
+
+            </div>
+
+
+            <div id="historyList" class="history-list">
+            </div>
+
+
+            <div id="emptyHistory" class="empty-history">
+                <div>🌱</div>
+                <h3 id="emptyHistoryTitle">No activity yet</h3>
+                <p id="emptyHistoryText">Your crop problem and farm monitoring activities will appear here.</p>
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+
+<!-- ================= PLANT REPORT FORM PAGE ================= -->
+
+<div id="plantReportPage" class="plant-report-page hidden">
+
+    <div class="report-container">
+
+        <div class="report-header">
+            <button class="back-btn" onclick="closePlantReport()">← Back</button>
+            <h1>🌱 Plant Problem Report</h1>
+            <p>Please fill in the details about your plant problem</p>
+        </div>
+
+        <form id="plantReportForm" class="report-form" onsubmit="submitPlantReport(event)">
+
+            <div class="form-group">
+                <label for="plantPhoto">📸 Plant Photo</label>
+                <div class="upload-area" onclick="document.getElementById('plantPhoto').click()">
+                    <span>📤</span>
+                    <p>Click to upload a photo of your plant</p>
+                    <input type="file" id="plantPhoto" accept="image/*" required>
+                </div>
+                <div id="plantPhotoPreview" class="photo-preview hidden">
+                    <img id="plantPreviewImage" src="#" alt="Plant Photo">
+                    <button type="button" onclick="removePlantPhoto()">✕ Remove</button>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="plantName">🌿 Plant Name</label>
+                <select id="plantName" required>
+                    <option value="">Select plant</option>
+                    <option value="Rose">🌹 Rose</option>
+                    <option value="Tomato">🍅 Tomato</option>
+                    <option value="Mango">🥭 Mango</option>
+                    <option value="Wheat">🌾 Wheat</option>
+                    <option value="Rice">🌾 Rice</option>
+                    <option value="Corn">🌽 Corn</option>
+                    <option value="Cotton">🌱 Cotton</option>
+                    <option value="Sugarcane">🎋 Sugarcane</option>
+                    <option value="Potato">🥔 Potato</option>
+                    <option value="Onion">🧅 Onion</option>
+                    <option value="Chili">🌶️ Chili</option>
+                    <option value="Brinjal">🍆 Brinjal</option>
+                    <option value="Banana">🍌 Banana</option>
+                    <option value="Papaya">🍈 Papaya</option>
+                    <option value="Lemon">🍋 Lemon</option>
+                    <option value="Other">🌿 Other</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="plantWater">💧 Water (Under 7 days)</label>
+                <select id="plantWater" required>
+                    <option value="">Select water quantity</option>
+                    <option value="Less than 100ml">Less than 100ml</option>
+                    <option value="100ml - 500ml">100ml - 500ml</option>
+                    <option value="500ml - 1 liter">500ml - 1 liter</option>
+                    <option value="1 - 2 liters">1 - 2 liters</option>
+                    <option value="2 - 5 liters">2 - 5 liters</option>
+                    <option value="5 - 10 liters">5 - 10 liters</option>
+                    <option value="10+ liters">10+ liters</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="plantSunlight">☀️ Sunlight</label>
+                <select id="plantSunlight" required>
+                    <option value="">Select sunlight exposure</option>
+                    <option value="Full Sun">Full Sun (6+ hours)</option>
+                    <option value="Partial Sun">Partial Sun (3-6 hours)</option>
+                    <option value="Shade">Shade (Less than 3 hours)</option>
+                    <option value="Indirect Light">Indirect Light</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="plantAge">📅 Plant Age</label>
+                <select id="plantAge" required>
+                    <option value="">Select plant age</option>
+                    <option value="Less than 1 week">Less than 1 week</option>
+                    <option value="1 - 2 weeks">1 - 2 weeks</option>
+                    <option value="2 - 4 weeks">2 - 4 weeks</option>
+                    <option value="1 - 2 months">1 - 2 months</option>
+                    <option value="2 - 6 months">2 - 6 months</option>
+                    <option value="6 - 12 months">6 - 12 months</option>
+                    <option value="1 - 2 years">1 - 2 years</option>
+                    <option value="2 - 5 years">2 - 5 years</option>
+                    <option value="5+ years">5+ years</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="plantSoil">🌱 Soil Type</label>
+                <select id="plantSoil" required>
+                    <option value="">Select soil type</option>
+                    <option value="Sandy Soil">Sandy Soil</option>
+                    <option value="Clay Soil">Clay Soil</option>
+                    <option value="Silty Soil">Silty Soil</option>
+                    <option value="Peaty Soil">Peaty Soil</option>
+                    <option value="Chalky Soil">Chalky Soil</option>
+                    <option value="Loamy Soil">Loamy Soil</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="plantTemp">🌡️ Temperature</label>
+                <select id="plantTemp" required>
+                    <option value="">Select temperature</option>
+                    <option value="Below 10°C">Below 10°C (Cold)</option>
+                    <option value="10°C - 15°C">10°C - 15°C</option>
+                    <option value="15°C - 20°C">15°C - 20°C</option>
+                    <option value="20°C - 25°C">20°C - 25°C</option>
+                    <option value="25°C - 30°C">25°C - 30°C</option>
+                    <option value="30°C - 35°C">30°C - 35°C</option>
+                    <option value="35°C - 40°C">35°C - 40°C</option>
+                    <option value="Above 40°C">Above 40°C (Very Hot)</option>
+                </select>
+            </div>
+
+            <button type="submit" class="submit-btn">Submit Report →</button>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+
+<!-- ================= FARMING REPORT FORM PAGE ================= -->
+
+<div id="farmingReportPage" class="plant-report-page hidden">
+
+    <div class="report-container">
+
+        <div class="report-header">
+            <button class="back-btn" onclick="closeFarmingReport()">← Back</button>
+            <h1>🌾 Farming Problem Report</h1>
+            <p>Please fill in the details about your crop/farming problem</p>
+        </div>
+
+        <form id="farmingReportForm" class="report-form" onsubmit="submitFarmingReport(event)">
+
+            <div class="form-group">
+                <label for="cropPhoto">📸 Crop Photo</label>
+                <div class="upload-area" onclick="document.getElementById('cropPhoto').click()">
+                    <span>📤</span>
+                    <p>Click to upload a photo of your crop</p>
+                    <input type="file" id="cropPhoto" accept="image/*" required>
+                </div>
+                <div id="cropPhotoPreview" class="photo-preview hidden">
+                    <img id="cropPreviewImage" src="#" alt="Crop Photo">
+                    <button type="button" onclick="removeCropPhoto()">✕ Remove</button>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="cropName">🌾 Crop Name</label>
+                <select id="cropName" required>
+                    <option value="">Select crop</option>
+                    <option value="Wheat">🌾 Wheat</option>
+                    <option value="Rice">🌾 Rice</option>
+                    <option value="Corn">🌽 Corn</option>
+                    <option value="Cotton">🌱 Cotton</option>
+                    <option value="Sugarcane">🎋 Sugarcane</option>
+                    <option value="Soybean">🌱 Soybean</option>
+                    <option value="Groundnut">🥜 Groundnut</option>
+                    <option value="Mustard">🌼 Mustard</option>
+                    <option value="Barley">🌾 Barley</option>
+                    <option value="Millet">🌾 Millet</option>
+                    <option value="Pulses">🫘 Pulses</option>
+                    <option value="Vegetables">🥬 Vegetables</option>
+                    <option value="Fruits">🍎 Fruits</option>
+                    <option value="Other">🌿 Other</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="cropAge">📅 Crop Age</label>
+                <select id="cropAge" required>
+                    <option value="">Select crop age</option>
+                    <option value="Less than 1 week">Less than 1 week</option>
+                    <option value="1 - 2 weeks">1 - 2 weeks</option>
+                    <option value="2 - 4 weeks">2 - 4 weeks</option>
+                    <option value="1 - 2 months">1 - 2 months</option>
+                    <option value="2 - 3 months">2 - 3 months</option>
+                    <option value="3 - 6 months">3 - 6 months</option>
+                    <option value="6 - 12 months">6 - 12 months</option>
+                    <option value="1+ year">1+ year</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="affectedArea">📐 Affected Area</label>
+                <select id="affectedArea" required>
+                    <option value="">Select affected area</option>
+                    <option value="Less than 100 sq meters">Less than 100 sq meters</option>
+                    <option value="100 - 500 sq meters">100 - 500 sq meters</option>
+                    <option value="500 - 1000 sq meters">500 - 1000 sq meters</option>
+                    <option value="0.25 acre">0.25 acre</option>
+                    <option value="0.5 acre">0.5 acre</option>
+                    <option value="1 acre">1 acre</option>
+                    <option value="2 acres">2 acres</option>
+                    <option value="5 acres">5 acres</option>
+                    <option value="10+ acres">10+ acres</option>
+                    <option value="Entire field">Entire field</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="cropSymptoms">⚠️ Plant / Crop Symptoms</label>
+                <textarea id="cropSymptoms" rows="3" placeholder="Describe the problem you see (yellow leaves, spots, wilting, stunted growth, etc.)" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="cropWater">💧 Water (7 days)</label>
+                <select id="cropWater" required>
+                    <option value="">Select water quantity</option>
+                    <option value="Less than 100 liters">Less than 100 liters</option>
+                    <option value="100 - 500 liters">100 - 500 liters</option>
+                    <option value="500 - 1000 liters">500 - 1000 liters</option>
+                    <option value="1000 - 2000 liters">1000 - 2000 liters</option>
+                    <option value="2000 - 5000 liters">2000 - 5000 liters</option>
+                    <option value="5000+ liters">5000+ liters</option>
+                    <option value="Flood irrigation">Flood irrigation</option>
+                    <option value="Drip irrigation">Drip irrigation</option>
+                    <option value="Sprinkler irrigation">Sprinkler irrigation</option>
+                    <option value="Rainfed only">Rainfed only</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="cropTemp">🌡️ Temperature</label>
+                <select id="cropTemp" required>
+                    <option value="">Select temperature</option>
+                    <option value="Below 10°C">Below 10°C (Cold)</option>
+                    <option value="10°C - 15°C">10°C - 15°C</option>
+                    <option value="15°C - 20°C">15°C - 20°C</option>
+                    <option value="20°C - 25°C">20°C - 25°C</option>
+                    <option value="25°C - 30°C">25°C - 30°C</option>
+                    <option value="30°C - 35°C">30°C - 35°C</option>
+                    <option value="35°C - 40°C">35°C - 40°C</option>
+                    <option value="Above 40°C">Above 40°C (Very Hot)</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="cropSunlight">☀️ Sunlight</label>
+                <select id="cropSunlight" required>
+                    <option value="">Select sunlight exposure</option>
+                    <option value="Full Sun">Full Sun (6+ hours)</option>
+                    <option value="Partial Sun">Partial Sun (3-6 hours)</option>
+                    <option value="Shade">Shade (Less than 3 hours)</option>
+                    <option value="Varies">Varies throughout the day</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="cropSoil">🌱 Soil Type</label>
+                <select id="cropSoil" required>
+                    <option value="">Select soil type</option>
+                    <option value="Sandy Soil">Sandy Soil</option>
+                    <option value="Clay Soil">Clay Soil</option>
+                    <option value="Silty Soil">Silty Soil</option>
+                    <option value="Peaty Soil">Peaty Soil</option>
+                    <option value="Chalky Soil">Chalky Soil</option>
+                    <option value="Loamy Soil">Loamy Soil</option>
+                    <option value="Black Soil">Black Soil</option>
+                    <option value="Red Soil">Red Soil</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="weatherCondition">🌦️ Weather Condition</label>
+                <select id="weatherCondition" required>
+                    <option value="">Select weather condition</option>
+                    <option value="Sunny">☀️ Sunny</option>
+                    <option value="Cloudy">☁️ Cloudy</option>
+                    <option value="Rainy">🌧️ Rainy</option>
+                    <option value="Stormy">⛈️ Stormy</option>
+                    <option value="Foggy">🌫️ Foggy</option>
+                    <option value="Windy">💨 Windy</option>
+                    <option value="Humid">💦 Humid</option>
+                    <option value="Dry">🏜️ Dry</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="pestInsects">🐛 Pests / Insects</label>
+                <select id="pestInsects" required>
+                    <option value="">Select pests / insects</option>
+                    <option value="None">None</option>
+                    <option value="Aphids">🐛 Aphids</option>
+                    <option value="Caterpillars">🐛 Caterpillars</option>
+                    <option value="Locusts">🦗 Locusts</option>
+                    <option value="Whiteflies">🦟 Whiteflies</option>
+                    <option value="Thrips">🐜 Thrips</option>
+                    <option value="Stem Borer">🐛 Stem Borer</option>
+                    <option value="Leaf Hopper">🦗 Leaf Hopper</option>
+                    <option value="Armyworm">🐛 Armyworm</option>
+                    <option value="Termites">🐜 Termites</option>
+                    <option value="Rodents">🐭 Rodents</option>
+                    <option value="Birds">🐦 Birds</option>
+                    <option value="Multiple Pests">⚠️ Multiple Pests</option>
+                    <option value="Unknown">❓ Unknown</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="fertilizerUsed">🧪 Fertilizer Used</label>
+                <select id="fertilizerUsed" required>
+                    <option value="">Select fertilizer</option>
+                    <option value="None">None</option>
+                    <option value="NPK">🧪 NPK</option>
+                    <option value="Urea">🧪 Urea</option>
+                    <option value="DAP">🧪 DAP</option>
+                    <option value="Compost">🌿 Compost</option>
+                    <option value="Vermicompost">🪱 Vermicompost</option>
+                    <option value="Cow Manure">🐄 Cow Manure</option>
+                    <option value="Green Manure">🌱 Green Manure</option>
+                    <option value="Potash">🧪 Potash</option>
+                    <option value="Organic Fertilizer">🌿 Organic Fertilizer</option>
+                    <option value="Mixed Fertilizer">🧪 Mixed Fertilizer</option>
+                    <option value="Other">🌿 Other</option>
+                </select>
+            </div>
+
+            <button type="submit" class="submit-btn">Submit Report →</button>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+
+<!-- ================= PLANT MONITORING FORM PAGE ================= -->
+
+<div id="plantMonitoringPage" class="plant-report-page hidden">
+
+    <div class="report-container">
+
+        <div class="report-header">
+            <button class="back-btn" onclick="closePlantMonitoring()">← Back</button>
+            <h1>🌱 Plant Monitoring</h1>
+            <p>Track your plant growth & health</p>
+        </div>
+
+        <form id="plantMonitoringForm" class="report-form" onsubmit="submitPlantMonitoring(event)">
+
+            <div class="form-group">
+                <label for="monitorPlantPhoto">📸 Plant Photo</label>
+                <div class="upload-area" onclick="document.getElementById('monitorPlantPhoto').click()">
+                    <span>📤</span>
+                    <p>Click to upload a photo of your plant</p>
+                    <input type="file" id="monitorPlantPhoto" accept="image/*" required>
+                </div>
+                <div id="monitorPlantPhotoPreview" class="photo-preview hidden">
+                    <img id="monitorPlantPreviewImage" src="#" alt="Plant Photo">
+                    <button type="button" onclick="removeMonitorPlantPhoto()">✕ Remove</button>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="monitorPlantName">🌿 Plant Name</label>
+                <select id="monitorPlantName" required>
+                    <option value="">Select plant</option>
+                    <option value="Rose">🌹 Rose</option>
+                    <option value="Tomato">🍅 Tomato</option>
+                    <option value="Mango">🥭 Mango</option>
+                    <option value="Wheat">🌾 Wheat</option>
+                    <option value="Rice">🌾 Rice</option>
+                    <option value="Corn">🌽 Corn</option>
+                    <option value="Cotton">🌱 Cotton</option>
+                    <option value="Sugarcane">🎋 Sugarcane</option>
+                    <option value="Potato">🥔 Potato</option>
+                    <option value="Onion">🧅 Onion</option>
+                    <option value="Chili">🌶️ Chili</option>
+                    <option value="Brinjal">🍆 Brinjal</option>
+                    <option value="Banana">🍌 Banana</option>
+                    <option value="Papaya">🍈 Papaya</option>
+                    <option value="Lemon">🍋 Lemon</option>
+                    <option value="Other">🌿 Other</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="plantHeight">📏 Plant Height</label>
+                <select id="plantHeight" required>
+                    <option value="">Select plant height</option>
+                    <option value="Less than 10cm">Less than 10cm</option>
+                    <option value="10 - 30cm">10 - 30cm</option>
+                    <option value="30 - 60cm">30 - 60cm</option>
+                    <option value="60 - 100cm">60 - 100cm</option>
+                    <option value="1 - 1.5 feet">1 - 1.5 feet</option>
+                    <option value="1.5 - 3 feet">1.5 - 3 feet</option>
+                    <option value="3 - 5 feet">3 - 5 feet</option>
+                    <option value="5 - 10 feet">5 - 10 feet</option>
+                    <option value="10+ feet">10+ feet</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="leafCondition">🍃 Leaf Condition</label>
+                <select id="leafCondition" required>
+                    <option value="">Select leaf condition</option>
+                    <option value="Excellent">Excellent - Dark green, healthy</option>
+                    <option value="Good">Good - Slight yellowing</option>
+                    <option value="Average">Average - Some spots/discoloration</option>
+                    <option value="Poor">Poor - Wilting/dry/brown leaves</option>
+                    <option value="Drooping">Drooping - Leaves are hanging down</option>
+                    <option value="Curling">Curling - Leaves are curling up/down</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="plantGrowthStage">📈 Growth Stage</label>
+                <select id="plantGrowthStage" required>
+                    <option value="">Select growth stage</option>
+                    <option value="Seedling">🌱 Seedling Stage</option>
+                    <option value="Vegetative">🌿 Vegetative Stage</option>
+                    <option value="Flowering">🌸 Flowering Stage</option>
+                    <option value="Fruiting">🍎 Fruiting Stage</option>
+                    <option value="Mature">🌳 Mature Stage</option>
+                    <option value="Dormant">💤 Dormant Stage</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="plantSunlightMonitor">☀️ Sunlight</label>
+                <select id="plantSunlightMonitor" required>
+                    <option value="">Select sunlight exposure</option>
+                    <option value="Full Sun">Full Sun (6+ hours)</option>
+                    <option value="Partial Sun">Partial Sun (3-6 hours)</option>
+                    <option value="Shade">Shade (Less than 3 hours)</option>
+                    <option value="Indirect Light">Indirect Light</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="soilMoisture">💧 Soil Moisture</label>
+                <select id="soilMoisture" required>
+                    <option value="">Select soil moisture</option>
+                    <option value="Very Wet">Very Wet - Waterlogged</option>
+                    <option value="Moist">Moist - Perfect for plants</option>
+                    <option value="Slightly Dry">Slightly Dry - Needs water soon</option>
+                    <option value="Very Dry">Very Dry - Needs water immediately</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="soilConditionMonitor">🌱 Soil Condition</label>
+                <select id="soilConditionMonitor" required>
+                    <option value="">Select soil condition</option>
+                    <option value="Excellent">Excellent - Rich and fertile</option>
+                    <option value="Good">Good - Healthy soil</option>
+                    <option value="Average">Average - Needs improvement</option>
+                    <option value="Poor">Poor - Dry/cracked/compacted</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="plantHealth">❤️ Plant Health</label>
+                <select id="plantHealth" required>
+                    <option value="">Select plant health</option>
+                    <option value="Excellent">🌟 Excellent - Thriving</option>
+                    <option value="Good">👍 Good - Healthy</option>
+                    <option value="Average">👌 Average - Needs care</option>
+                    <option value="Poor">⚠️ Poor - Needs immediate attention</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="plantTempMonitor">🌡️ Temperature</label>
+                <select id="plantTempMonitor" required>
+                    <option value="">Select temperature</option>
+                    <option value="Below 10°C">Below 10°C (Cold)</option>
+                    <option value="10°C - 15°C">10°C - 15°C</option>
+                    <option value="15°C - 20°C">15°C - 20°C</option>
+                    <option value="20°C - 25°C">20°C - 25°C</option>
+                    <option value="25°C - 30°C">25°C - 30°C</option>
+                    <option value="30°C - 35°C">30°C - 35°C</option>
+                    <option value="35°C - 40°C">35°C - 40°C</option>
+                    <option value="Above 40°C">Above 40°C (Very Hot)</option>
+                </select>
+            </div>
+
+            <button type="submit" class="submit-btn">Submit Monitoring →</button>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+
+<!-- ================= FARMING MONITORING FORM PAGE ================= -->
+
+<div id="farmingMonitoringPage" class="plant-report-page hidden">
+
+    <div class="report-container">
+
+        <div class="report-header">
+            <button class="back-btn" onclick="closeFarmingMonitoring()">← Back</button>
+            <h1>🌾 Farming Monitoring</h1>
+            <p>Track your farm & crop progress</p>
+        </div>
+
+        <form id="farmingMonitoringForm" class="report-form" onsubmit="submitFarmingMonitoring(event)">
+
+            <div class="form-group">
+                <label for="monitorCropPhoto">📸 Crop Photo</label>
+                <div class="upload-area" onclick="document.getElementById('monitorCropPhoto').click()">
+                    <span>📤</span>
+                    <p>Click to upload a photo of your crop</p>
+                    <input type="file" id="monitorCropPhoto" accept="image/*" required>
+                </div>
+                <div id="monitorCropPhotoPreview" class="photo-preview hidden">
+                    <img id="monitorCropPreviewImage" src="#" alt="Crop Photo">
+                    <button type="button" onclick="removeMonitorCropPhoto()">✕ Remove</button>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="monitorCropName">🌾 Crop Name</label>
+                <select id="monitorCropName" required>
+                    <option value="">Select crop</option>
+                    <option value="Wheat">🌾 Wheat</option>
+                    <option value="Rice">🌾 Rice</option>
+                    <option value="Corn">🌽 Corn</option>
+                    <option value="Cotton">🌱 Cotton</option>
+                    <option value="Sugarcane">🎋 Sugarcane</option>
+                    <option value="Soybean">🌱 Soybean</option>
+                    <option value="Groundnut">🥜 Groundnut</option>
+                    <option value="Mustard">🌼 Mustard</option>
+                    <option value="Barley">🌾 Barley</option>
+                    <option value="Millet">🌾 Millet</option>
+                    <option value="Pulses">🫘 Pulses</option>
+                    <option value="Vegetables">🥬 Vegetables</option>
+                    <option value="Fruits">🍎 Fruits</option>
+                    <option value="Other">🌿 Other</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="cropGrowthStage">📈 Crop Growth Stage</label>
+                <select id="cropGrowthStage" required>
+                    <option value="">Select growth stage</option>
+                    <option value="Germination">🌱 Germination Stage</option>
+                    <option value="Seedling">🌿 Seedling Stage</option>
+                    <option value="Vegetative">🌾 Vegetative Stage</option>
+                    <option value="Flowering">🌸 Flowering Stage</option>
+                    <option value="Fruiting">🍎 Fruiting Stage</option>
+                    <option value="Maturity">🌾 Maturity Stage</option>
+                    <option value="Harvesting">🚜 Harvesting Stage</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="fieldCondition">🏞️ Field Condition</label>
+                <select id="fieldCondition" required>
+                    <option value="">Select field condition</option>
+                    <option value="Excellent">Excellent - Well maintained</option>
+                    <option value="Good">Good - Healthy field</option>
+                    <option value="Average">Average - Needs attention</option>
+                    <option value="Poor">Poor - Weeds/erosion/compaction</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="soilQuality">🌱 Soil Quality</label>
+                <select id="soilQuality" required>
+                    <option value="">Select soil quality</option>
+                    <option value="Very Fertile">Very Fertile - Rich in nutrients</option>
+                    <option value="Fertile">Fertile - Good nutrients</option>
+                    <option value="Average">Average - Moderate nutrients</option>
+                    <option value="Poor">Poor - Needs fertilization</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="soilMoistureMonitor">💧 Soil Moisture</label>
+                <select id="soilMoistureMonitor" required>
+                    <option value="">Select soil moisture</option>
+                    <option value="Very Wet">Very Wet - Waterlogged</option>
+                    <option value="Moist">Moist - Ideal for crops</option>
+                    <option value="Slightly Dry">Slightly Dry - Needs irrigation</option>
+                    <option value="Very Dry">Very Dry - Urgent irrigation needed</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="irrigationType">🚿 Irrigation Type</label>
+                <select id="irrigationType" required>
+                    <option value="">Select irrigation type</option>
+                    <option value="Rainfed">Rainfed - Only rain</option>
+                    <option value="Drip">💧 Drip Irrigation</option>
+                    <option value="Sprinkler">🌊 Sprinkler Irrigation</option>
+                    <option value="Flood">🌊 Flood Irrigation</option>
+                    <option value="Furrow">📏 Furrow Irrigation</option>
+                    <option value="Canal">🏗️ Canal Irrigation</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="rainfall">🌧️ Rainfall (Last 7 days)</label>
+                <select id="rainfall" required>
+                    <option value="">Select rainfall</option>
+                    <option value="Heavy">Heavy Rainfall (40mm+)</option>
+                    <option value="Moderate">Moderate (10-40mm)</option>
+                    <option value="Light">Light (1-10mm)</option>
+                    <option value="None">No Rainfall</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="weatherMonitor">🌦️ Weather Condition (Last 7 Days)</label>
+                <select id="weatherMonitor" required>
+                    <option value="">Select weather condition</option>
+                    <option value="Sunny">☀️ Sunny</option>
+                    <option value="Cloudy">☁️ Cloudy</option>
+                    <option value="Rainy">🌧️ Rainy</option>
+                    <option value="Stormy">⛈️ Stormy</option>
+                    <option value="Foggy">🌫️ Foggy</option>
+                    <option value="Windy">💨 Windy</option>
+                    <option value="Humid">💦 Humid</option>
+                    <option value="Dry">🏜️ Dry</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="cropHealth">❤️ Crop Health</label>
+                <select id="cropHealth" required>
+                    <option value="">Select crop health</option>
+                    <option value="Excellent">🌟 Excellent - Thriving</option>
+                    <option value="Good">👍 Good - Healthy</option>
+                    <option value="Average">👌 Average - Needs care</option>
+                    <option value="Poor">⚠️ Poor - Needs immediate attention</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="cropTempMonitor">🌡️ Temperature</label>
+                <select id="cropTempMonitor" required>
+                    <option value="">Select temperature</option>
+                    <option value="Below 10°C">Below 10°C (Cold)</option>
+                    <option value="10°C - 15°C">10°C - 15°C</option>
+                    <option value="15°C - 20°C">15°C - 20°C</option>
+                    <option value="20°C - 25°C">20°C - 25°C</option>
+                    <option value="25°C - 30°C">25°C - 30°C</option>
+                    <option value="30°C - 35°C">30°C - 35°C</option>
+                    <option value="35°C - 40°C">35°C - 40°C</option>
+                    <option value="Above 40°C">Above 40°C (Very Hot)</option>
+                </select>
+            </div>
+
+            <button type="submit" class="submit-btn">Submit Monitoring →</button>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+
+<script src="script.js"></script>
 
 </body>
-
 </html>
